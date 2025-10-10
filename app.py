@@ -1,4 +1,5 @@
 from flask import Flask,render_template,redirect,url_for,request,flash
+from db import conn 
 
 app = Flask(__name__)
 
@@ -6,14 +7,41 @@ app = Flask(__name__)
 def home():
     return render_template("/sitio/index.html")
 
-#Seccion de Libros
+#Ruta Libros
 @app.route("/libros")
 def libros():
-    return render_template("/sitio/libros.html")
+    return render_template('/sitio/libros.html')
+
+#Ruta de alumnos
+@app.route("/alumno",methods=['GET'])
+def alumno():
+    query = 'select * from alumno'
+    conexion = conn()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    data = cursor.fetchall()
+    return render_template("/sitio/alumnos.html",alumno=data)
+
+ #Ruta para guardar Alumnos
+@app.route("/reg_alumno",methods=['POST'])
+def reg_alumnos():
+    conexion = conn()
+    query = 'INSERT INTO alumno(apenomb,dni,correo)VALUES(%s,%s,%s)'
+    
+    nombre = request.form['nombre']
+    dni = request.form['dni']
+    correo = request.form['correo']
+    cursor = conexion.cursor()
+    cursor.execute(query,(nombre,dni,correo))
+    conexion.commit()
+    print("Registro Guardado Exitosamente")
+    return redirect(url_for('alumno'))
+
+#tabla alumnos
 
 
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=True) 
 
 

@@ -62,6 +62,26 @@
   border-bottom: 2px solid #00aaff;
 }
 
+.container-form{
+  width: 40%;
+  margin-left: 40px;
+  border: solid 1px #2510dd;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.container-table{
+ 
+  margin-left: 40px;
+  border: solid 1px #2510dd;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.container-main{
+  display: flex;
+}
 /* Responsive */
 @media (max-width: 768px) {
   .navbar-container {
