@@ -37,7 +37,29 @@ def reg_alumnos():
     print("Registro Guardado Exitosamente")
     return redirect(url_for('alumno'))
 
-#tabla alumnos
+#Eliminar alumno
+@app.route("/delete/<string:id>")
+def delete_Alumno(id):
+    query = "delete from alumno where idalumno = %s"
+    conexion = conn()
+    cursor = conexion.cursor()
+    cursor.execute(query,(id))
+    conexion.commit()
+    return redirect(url_for('alumno'))
+
+#Actualizar ALumnos
+@app.route("/Update_Alumno/<string:id>",methods=['POST'])
+def Actualizar_Alumno(id):
+    conexion = conn()
+    nombre = request.form['name']
+    dni = request.form['document']
+    correo = request.form['email']
+    query = 'UPDATE alumno SET apenomb = %s,dni=%s,correo=%s WHERE idalumno = %s'
+    cursor = conexion.cursor()
+    cursor.execute(query,(nombre,dni,correo,id))
+    conexion.commit()
+    return redirect(url_for('alumno'))
+
 
 
 
