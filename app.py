@@ -60,6 +60,14 @@ def Actualizar_Alumno(id):
     conexion.commit()
     return redirect(url_for('alumno'))
 
+# -------------- SECCION DOCENTES -----------------------------------------------
+
+#Ruta para Docentes
+
+@app.route("/Docentes")
+def homeDocentes():
+    return render_template("/sitio/docentes.html")
+
 
 
 
