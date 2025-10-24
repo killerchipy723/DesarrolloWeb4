@@ -60,7 +60,21 @@ def Actualizar_Alumno(id):
     conexion.commit()
     return redirect(url_for('alumno'))
 
+#-------------------- SECCION CARRERAS ------------------------------------------
+#ruta Carreras
+@app.route("/carrera",methods=['GET'])
+def carrera():
+    return render_template("/sitio/carreras.html")
 
+# -------------- SECCION DOCENTES -----------------------------------------------
+
+#Ruta para Docentes
+
+@app.route("/Docentes")
+def homeDocentes():
+    return render_template("/sitio/docentes.html")
+
+ 
 
 
 if __name__ == '__main__':

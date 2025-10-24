@@ -1,0 +1,111 @@
+{% include 'sitio/cabecera.html' %}
+
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-body">      
+      <form action="/reg_carreras" method="post">
+        <div class="row mb-3">
+          <div class="col">
+            <label for="">Nombre</label>
+            <input type="text" name="nombre" class="form-control mb-3" required>
+          </div>
+          <div class="col">
+            <label for="">Duración</label>
+            <input type="number" name="duracion" class="form-control mb-3" required>
+          </div>
+          <div class="col">
+            <label for="">Tipo</label>
+            <select name="tipo" class="form-control mb-3" required>
+                <option disabled selected> --- Seleccione el Tipo de Carrera</option>
+                <option value="Profesorado">Profesorado</option>
+                <option value="Tecnicatura">Tecnicatura</option>
+                <option value="Otro">Otro</option>
+            </select>            
+          </div>
+          <div class="col">
+            <button class="btn btn-primary mb-3 mt-4" type="submit">Registrar</button>
+          </div>
+        </div>
+      </form>
+
+      <table class="table table-bordered">                  
+        <thead>
+          <th scope="col">ID</th>
+          <th scope="col">NOMBRE</th>
+          <th scope="col">DURACION</th>
+          <th scope="col">TIPO</th>
+          <th scope="col">ACCIONES</th>       
+        </thead>
+        <tbody>
+          {% for car in carrera %}
+          <tr>
+            <td>{{car[0]}}</td>
+            <td>{{car[1]}}</td>
+            <td>{{car[2]}}</td>
+            <td>{{car[3]}}</td>
+            <td>
+              <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal{{car[0]}}">EDITAR</a>                                  
+              <!-- Botón que abre el modal de confirmación -->
+              <a class="btn btn-danger btn-sm" href="#" 
+                 data-bs-toggle="modal" 
+                 data-bs-target="#modal2{{alu[0]}}" 
+                 data-id="{{car[0]}}">ELIMINAR</a>
+            </td>
+          </tr>
+
+          <!-- MODAL EDITAR -->
+          <div class="modal fade" id="modal{{car[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5">{{alu[1]}}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/Update_Carrera/{{car[0]}}" method="post">
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" class="form-control mb-3" required value="{{car[1]}}">
+                    <label>DURACION</label>
+                    <input type="text" name="duracion" class="form-control mb-3" required value="{{car[2]}}">
+                    <label>TIPO</label>
+                     <select name="tipo" class="form-control mb-3" required>
+                <option disabled selected> --- Sel. el Tipo de Carrera ---</option>
+                <option value="Profesorado">Profesorado</option>
+                <option value="Tecnicatura">Tecnicatura</option>
+                <option value="Otro">Otro</option>
+            </select> 
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODAL CONFIRMACIÓN ELIMINAR -->
+          <div class="modal fade" id="modal2{{car[0]}}" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                  <h5 class="modal-title">Eliminar a: {{car[1]}}</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ¿Está seguro de que desea eliminar este registro?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <a href="/delete_Car/{{car[0]}}" class="btn btn-danger">Sí, eliminar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% include 'sitio/pie.html' %}
