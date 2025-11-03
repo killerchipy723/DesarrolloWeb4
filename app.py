@@ -1,16 +1,24 @@
+#-------------------- SECCION DE IMPORTACION DE MODULOS ----------------------------------
 from flask import Flask,render_template,redirect,url_for,request,flash
 from db import conn 
 
+#-------------------- SECCION CREACION DE API -------------------------------------------
+
 app = Flask(__name__)
+
+#-------------------- SECCION RUTA PRINCIPAL -------------------------------------------
 
 @app.route("/")
 def home():
     return render_template("/sitio/index.html")
 
+#--------------------- SECCION LIBROS ---------------------------------------------------
+
 #Ruta Libros
 @app.route("/libros")
 def libros():
     return render_template('/sitio/libros.html')
+#-------------------- SECCION ALUMNOS -------------------------------------------
 
 #Ruta de alumnos
 @app.route("/alumno",methods=['GET'])
@@ -46,7 +54,7 @@ def delete_Alumno(id):
     cursor.execute(query,(id))
     conexion.commit()
     return redirect(url_for('alumno'))
-
+#-------------------- SECCION ALUMNOS -------------------------------------------
 #Actualizar ALumnos
 @app.route("/Update_Alumno/<string:id>",methods=['POST'])
 def Actualizar_Alumno(id):
@@ -66,7 +74,7 @@ def Actualizar_Alumno(id):
 def carrera():
     return render_template("/sitio/carreras.html")
 
-# -------------- SECCION DOCENTES -----------------------------------------------
+# -------------------- SECCION DOCENTES -----------------------------------------
 
 #Ruta para Docentes
 
@@ -76,6 +84,7 @@ def homeDocentes():
 
  
 
+#-------------------- SECCION ARRANQUE SERVIDOR FLASK ----------------------------
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
