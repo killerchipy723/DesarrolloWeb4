@@ -80,9 +80,37 @@ def carrera():
 
 @app.route("/Docentes")
 def homeDocentes():
-    return render_template("/sitio/docentes.html")
+    query = 'select * from docente'
+    conexion = conn()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    data = cursor.fetchall()
+    return render_template("/sitio/docentes.html",docente=data)
 
- 
+ #Ruta para guardar Docentes
+@app.route("/reg_docente",methods=['POST'])
+def reg_docente():
+    conexion = conn()
+    query = 'INSERT INTO docente(apenomb,dni,correo)VALUES(%s,%s,%s)'
+    
+    nombre = request.form['nombre']
+    dni = request.form['dni']
+    correo = request.form['correo']
+    cursor = conexion.cursor()
+    cursor.execute(query,(nombre,dni,correo))
+    conexion.commit()
+    print("Registro Guardado Exitosamente")
+    return redirect(url_for('homeDocentes'))
+
+#Eliminar Docentes
+@app.route("/delete_doc/<string:id>")
+def delete_Docente(id):
+    query = "delete from docente where iddocente = %s"
+    conexion = conn()
+    cursor = conexion.cursor()
+    cursor.execute(query,(id))
+    conexion.commit()
+    return redirect(url_for('homeDocentes'))
 
 #-------------------- SECCION ARRANQUE SERVIDOR FLASK ----------------------------
 

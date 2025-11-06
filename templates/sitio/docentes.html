@@ -32,38 +32,38 @@
           <th scope="col">ACCIONES</th>       
         </thead>
         <tbody>
-          {% for alu in alumno %}
+          {% for doc in docente %}
           <tr>
-            <td>{{alu[0]}}</td>
-            <td>{{alu[1]}}</td>
-            <td>{{alu[2]}}</td>
-            <td>{{alu[3]}}</td>
+            <td>{{doc[0]}}</td>
+            <td>{{doc[1]}}</td>
+            <td>{{doc[2]}}</td>
+            <td>{{doc[3]}}</td>
             <td>
-              <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal{{alu[0]}}">EDITAR</a>                                  
+              <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal{{doc[0]}}">EDITAR</a>                                  
               <!-- Botón que abre el modal de confirmación -->
               <a class="btn btn-danger btn-sm" href="#" 
                  data-bs-toggle="modal" 
-                 data-bs-target="#modal2{{alu[0]}}" 
-                 data-id="{{alu[0]}}">ELIMINAR</a>
+                 data-bs-target="#modal2{{doc[0]}}" 
+                 data-id="{{doc[0]}}">ELIMINAR</a>
             </td>
           </tr>
 
           <!-- MODAL EDITAR -->
-          <div class="modal fade" id="modal{{alu[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="modal{{doc[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5">{{alu[1]}}</h1>
+                  <h1 class="modal-title fs-5">{{doc[1]}}</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form action="/Update_Docente/{{alu[0]}}" method="post">
+                  <form action="/Update_Docente/{{doc[0]}}" method="post">
                     <label>Nombre</label>
-                    <input type="text" name="name" class="form-control mb-3" required value="{{alu[1]}}">
+                    <input type="text" name="name" class="form-control mb-3" required value="{{doc[1]}}">
                     <label>DNI</label>
-                    <input type="text" name="document" class="form-control mb-3" required value="{{alu[2]}}">
+                    <input type="text" name="document" class="form-control mb-3" required value="{{doc[2]}}">
                     <label>Correo Electrónico</label>
-                    <input type="email" name="email" class="form-control mb-3" required value="{{alu[3]}}">
+                    <input type="email" name="email" class="form-control mb-3" required value="{{doc[3]}}">
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -74,11 +74,11 @@
           </div>
 
           <!-- MODAL CONFIRMACIÓN ELIMINAR -->
-          <div class="modal fade" id="modal2{{alu[0]}}" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+          <div class="modal fade" id="modal2{{doc[0]}}" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                  <h5 class="modal-title">Eliminar a: {{alu[1]}}</h5>
+                  <h5 class="modal-title">Eliminar a: {{doc[1]}}</h5>
                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <a href="/delete_Doc/{{alu[0]}}" class="btn btn-danger">Sí, eliminar</a>
+                  <a href="/delete_doc/{{doc[0]}}" class="btn btn-danger">Sí, eliminar</a>
                 </div>
               </div>
             </div>
